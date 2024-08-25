@@ -1,10 +1,18 @@
-import axios, { AxiosResponse } from "axios";
+import axios, { AxiosError, AxiosResponse } from "axios";
 import { v4 as uuid } from "uuid";
 import { getSecret } from "./secrets";
 import { Transaction } from "src/transaction/entities/transaction.entity";
+import { config } from 'dotenv';
+import { Injectable } from "@nestjs/common";
+import { CustomResponse } from "./custom_response";
+const tag = "🔵 🔵 FNBApi";
 
+@Injectable()
 export class FNBApi {
-  static async getAccessToken(local: boolean): Promise<string> {
+  constructor() {
+    console.log(`${tag} FNBApi constructor, config() has run`)
+  }
+  async getAccessToken(local: boolean): Promise<string> {
     let authUrl: string;
     let clientId: string;
     let clientSecret: string;
@@ -47,7 +55,7 @@ export class FNBApi {
       }
     } catch (error) {
       const msg = `Authentication failed: ${error}`;
-      console.error(`${FNBApi.tag} We fell down hard, Boss! : ${msg}`);
+      console.error(`${tag} We fell down hard, Boss! : ${msg}`);
       throw new Error(`${msg}`);
     }
   }
@@ -67,50 +75,62 @@ export class FNBApi {
         data: refresh_payload,
       });
       return response.refresh_token;
-    } catch (e) {}
+    } catch (e) { }
   }
 
-  static tag = "🔵🔵 FNBApi";
-
-  static async getFakeTransactions(
-    account: string,
-    startDate: string,
-    endDate: string
-  ): Promise<any[]> {
-    console.log(`${FNBApi.tag} getFakeTransactions ... `);
-
+  tag = "🔵🔵🔵 FNBApi 🔵";
+  async getFakeTransactions(): Promise<CustomResponse> {
+    console.log(`${tag} ... getFakeTransactions ... `);
+    config();
     const dev = process.env.STATUS;
-    if (dev) {
-      const url = `${process.env.FAKE_BANK_LOCAL}getFakeFNBBatchTransactions`;
-      const resp = await axios.get(url);
-      if (resp.status === 200) {
-        return resp.data;
-      } else {
-        throw new Error(
-          `getFakeTransactions failed with status: ${resp.status}`
-        );
-      }
+    console.log(`${tag} dev status from .env: 🍎 ${dev} 🍎`);
+
+    let url: string;
+    if (dev === 'dev') {
+      url = `${process.env.FAKE_BANK_LOCAL}getFakeFNBBatchTransactions`;
     } else {
-      const url = `${process.env.FAKE_BANK_REMOTE}getFakeFNBBatchTransactions`;
-      const resp = await axios.get(url);
-      if (resp.status === 200) {
-        return resp.data;
-      } else {
-        throw new Error(
-          `getFakeTransactions failed with status: ${resp.status}`
-        );
-      }
+      url = `${process.env.FAKE_BANK_REMOTE}getFakeFNBBatchTransactions`;
     }
 
-    return [];
+    try {
+      console.log(`\n${tag} ............. calling: ${url}\n`);
+      const resp = await axios.get(url);
+      console.log(`${tag} fake transactions response, 🔵 status: ${resp.status}`);
+      const customResponse = new CustomResponse(resp.data.status, resp.data.message, resp.data.list);
+      if (customResponse.status == 200) {
+        customResponse.list.forEach((tx: any) => {
+          console.log(`${tag} Transaction, id: ${tx.id} 🍎 amount: ${tx.amount}`);
+        });
+      } else {
+        console.log(`${tag} Ran into Error: ${JSON.stringify(customResponse)}`)
+      }
+      return customResponse;
+    } catch (error) {
+      if (error instanceof AxiosError) {
+        // Axios error
+        const axiosError = error as AxiosError;
+        const errorMessage = axiosError.message;
+        const statusCode = axiosError.response?.status || 500;
+
+        // Create a custom error object
+        const customError = new CustomResponse(statusCode, errorMessage, []);
+        console.error(`${tag} Axios Error: ${JSON.stringify(customError)}`);
+        return customError;
+      } else {
+        // Other error
+        console.error(`${tag} Other Error: ${error.message}`);
+        const customError = new CustomResponse(400, error.message, []);
+        return customError
+      }
+    }
   }
 
-  static async getTransactions(
+  async getTransactions(
     account: string,
     startDate: string,
     endDate: string
   ): Promise<any> {
-    console.log(`${FNBApi.tag} getTransactionHistory ... `);
+    console.log(`${tag} getTransactionHistory ... `);
 
     let baseUrl: string;
     let accessToken: string;
@@ -135,7 +155,7 @@ export class FNBApi {
       };
 
       const url = `${baseUrl}/transaction-history/retrieve/v2/${account}`;
-      console.log(`${FNBApi.tag} getTransactionHistory ... calling: ${url}`);
+      console.log(`${tag} getTransactionHistory ... calling: ${url}`);
 
       const response: AxiosResponse = await axios.post(url, data, {
         headers: headers,
@@ -144,12 +164,12 @@ export class FNBApi {
       if (response.status === 200) {
         const transactionResponse: TransactionResponse = response.data;
         console.log(
-          `${FNBApi.tag} Transactions found: ${transactionResponse.list.length}`
+          `${tag} Transactions found: ${transactionResponse.list.length}`
         );
         return transactionResponse.list;
       } else {
         const msg = `getTransactionHistory failed with status: ${response.status} ${response.statusText}`;
-        console.error(`${FNBApi.tag} ${msg}`);
+        console.error(`${tag} ${msg}`);
         throw new Error(msg);
       }
     } catch (e) {
