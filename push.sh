@@ -56,6 +56,7 @@ git remote set-url origin "$repository_ssh_url"
 echo "🍎 🍎 🍎 ... Pushing the code ..."
 git push || { echo "👿👿👿👿 Failed to push code. 👿"; exit 1; }
 
+echo
 echo "DONE pushing!! 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬"
 echo
 

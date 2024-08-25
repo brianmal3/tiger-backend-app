@@ -16,10 +16,9 @@ const secrets_1 = require("./secrets");
 const dotenv_1 = require("dotenv");
 const common_1 = require("@nestjs/common");
 const custom_response_1 = require("./custom_response");
-const tag = "🔵 🔵 FNBApi";
+const tag = "🔵🔵🔵 FNBApi 🔵";
 let FNBApi = class FNBApi {
     constructor() {
-        this.tag = "🔵🔵🔵 FNBApi 🔵";
         console.log(`${tag} FNBApi constructor, config() has run`);
     }
     async getAccessToken(local) {
@@ -103,7 +102,7 @@ let FNBApi = class FNBApi {
                 customResponse.list.forEach((tx) => {
                     console.log(`${tag} Transaction, id: ${tx.id} 🍎 amount: ${tx.amount}`);
                 });
-                console.log(`\n${tag} fake transactions: 🍎 ${customResponse.list.length} 🍎`);
+                console.log(`\n${tag} 🥬 🥬 fake transactions: 🍎 ${customResponse.list.length} 🍎`);
             }
             else {
                 console.log(`\n${tag} ... ran into bleeping error: ${JSON.stringify(customResponse)}\n`);

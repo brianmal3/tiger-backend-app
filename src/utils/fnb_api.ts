@@ -5,7 +5,7 @@ import { Transaction } from "src/transaction/entities/transaction.entity";
 import { config } from 'dotenv';
 import { Injectable } from "@nestjs/common";
 import { CustomResponse } from "./custom_response";
-const tag = "🔵 🔵 FNBApi";
+const tag = "🔵🔵🔵 FNBApi 🔵";
 
 @Injectable()
 export class FNBApi {
@@ -78,7 +78,6 @@ export class FNBApi {
     } catch (e) { }
   }
 
-  tag = "🔵🔵🔵 FNBApi 🔵";
   async getFakeTransactions(): Promise<CustomResponse> {
     console.log(`${tag} ... getting fake Transactions ... `);
     config();
@@ -101,7 +100,7 @@ export class FNBApi {
         customResponse.list.forEach((tx: any) => {
           console.log(`${tag} Transaction, id: ${tx.id} 🍎 amount: ${tx.amount}`);
         });
-        console.log(`\n${tag} fake transactions: 🍎 ${customResponse.list.length} 🍎`);
+        console.log(`\n${tag} 🥬 🥬 fake transactions: 🍎 ${customResponse.list.length} 🍎`);
       } else {
         console.log(`\n${tag} ... ran into bleeping error: ${JSON.stringify(customResponse)}\n`)
       }
