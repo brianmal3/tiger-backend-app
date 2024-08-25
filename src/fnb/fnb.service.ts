@@ -10,14 +10,13 @@ export class FnbService {
       return transactions;
     } catch (error) {
       if (typeof error === 'string') {
-        // Parse the error string
         const customError = JSON.parse(error);
         console.error(`Error from FNBApi: ${JSON.stringify(customError)}`);
         return customError;
       } else {
         return {
           statusCode: 500,
-          message: 'getFakeTransactions - Internal Server Error',
+          message: 'getFakeTransactions - Fucking Server Error',
         }
       }
     }
