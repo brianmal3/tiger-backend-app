@@ -83,7 +83,7 @@ let FNBApi = class FNBApi {
         catch (e) { }
     }
     async getFakeTransactions() {
-        console.log(`${tag} ... getFakeTransactions ... `);
+        console.log(`${tag} ... getting fake Transactions ... `);
         (0, dotenv_1.config)();
         const dev = process.env.STATUS;
         console.log(`${tag} dev status from .env: 🍎 ${dev} 🍎`);

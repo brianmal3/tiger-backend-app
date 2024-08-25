@@ -20,11 +20,11 @@ repository_ssh_url=git@github.com:brianmal3/tiger-backend-app.git
 commit_message=$1
 
 # Echo the parameters for clarity
-echo 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵 Parameters provided:
+echo 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵 Parameters provided:
 echo 🔵 SSH Key Path: $ssh_key_path
 echo 🔵 Repository SSH URL: $repository_ssh_url
 echo 🔵 Commit Message: $commit_message
-echo 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
+echo 🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵🔵
 # Check if SSH key path file exists
 if [ ! -f "$ssh_key_path" ]; then
   echo "👿 SSH key file does not exist at the specified path: $ssh_key_path 👿"
