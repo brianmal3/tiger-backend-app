@@ -3,9 +3,10 @@
 # 🍎🍎🍎🍎 COMMAND TO PUSH CODE
 #  ./push.sh "🅿️ updated README"
 
-
-echo "\n🔴 🔴 🔴 🔴 🔴 Tiger Backend GitHub Push script starting ..."
-echo "🔴 🔴 🔴"
+echo
+echo
+echo 🔴 🔴 🔴 🔴 🔴 Tiger Backend GitHub Push starting ...
+echo 🔴 🔴 🔴 🔴 🔴 
 
 # Ensure the script is called with three arguments
 if [ "$#" -ne 1 ]; then
@@ -56,4 +57,5 @@ echo "🍎 🍎 🍎 ... Pushing the code ..."
 git push || { echo "👿👿👿👿 Failed to push code. 👿"; exit 1; }
 
 echo "DONE pushing!! 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬 🥬"
+echo
 
