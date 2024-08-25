@@ -1,8 +1,7 @@
-import { Repository } from "typeorm";
-import { Transaction } from './entities/transaction.entity';
+import { FirestoreService } from 'src/utils/firestore_util';
 export declare class TransactionService {
-    private transactionRepository;
-    constructor(transactionRepository: Repository<Transaction>);
-    findAll(): Promise<Transaction[]>;
-    findBatchTransactions(batchId: number): Promise<Transaction[]>;
+    private fire;
+    constructor(fire: FirestoreService);
+    findAll(): Promise<any[]>;
+    findBatchTransactions(batchId: string): Promise<any[]>;
 }

@@ -28,13 +28,10 @@ let CustomerController = class CustomerController {
         return this.customerService.findAll();
     }
     findOne(id) {
-        return this.customerService.findOne(+id);
+        return this.customerService.findOne(id);
     }
     update(id, updateCustomerDto) {
-        return this.customerService.update(+id, updateCustomerDto);
-    }
-    remove(id) {
-        return this.customerService.remove(+id);
+        return this.customerService.update(id, updateCustomerDto);
     }
 };
 exports.CustomerController = CustomerController;
@@ -55,7 +52,7 @@ __decorate([
     (0, common_1.Get)('/getCustomer'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], CustomerController.prototype, "findOne", null);
 __decorate([
@@ -63,16 +60,9 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_customer_dto_1.UpdateCustomerDto]),
+    __metadata("design:paramtypes", [String, update_customer_dto_1.UpdateCustomerDto]),
     __metadata("design:returntype", void 0)
 ], CustomerController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)('deleteCustomer'),
-    __param(0, (0, common_1.Param)('id')),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
-    __metadata("design:returntype", void 0)
-], CustomerController.prototype, "remove", null);
 exports.CustomerController = CustomerController = __decorate([
     (0, common_1.Controller)('customer'),
     __metadata("design:paramtypes", [customer_service_1.CustomerService])

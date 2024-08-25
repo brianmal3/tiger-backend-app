@@ -1,32 +1,27 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { FirestoreService } from 'src/utils/firestore_util';
 
 @Injectable()
 export class UserService {
   constructor(
-    @Inject()
-    private userRepository: Repository<User>,
+    private fire: FirestoreService,
   ) {}
   create(createUserDto: CreateUserDto) {
-    return this.userRepository.save(createUserDto);
+    return this.fire.writeData('users', '1', createUserDto);
   }
 
   findAll() {
-    return this.userRepository.find();
+    return this.fire.readAllData('users');
   }
 
-  findOne(id: number) {
-    return this.userRepository.findOne({where: {id: id}});
+  findOne(id: string) {
+    return this.fire.readDataByField('users', 'id', id);
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return this.userRepository.update(id, updateUserDto);
+  update(id: string, updateUserDto: UpdateUserDto) {
+    return this.fire.writeData('Users',id, updateUserDto);
   }
 
-  remove(id: number) {
-    return this.userRepository.delete(id);
-  }
 }

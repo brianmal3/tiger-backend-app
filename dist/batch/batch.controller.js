@@ -24,10 +24,10 @@ let BatchController = class BatchController {
         return this.batchService.findAll();
     }
     findOne(id) {
-        return this.batchService.findOne(+id);
+        return this.batchService.findOne(id);
     }
     update(id, updateBatchDto) {
-        return this.batchService.update(+id, updateBatchDto);
+        return this.batchService.update(id, updateBatchDto);
     }
 };
 exports.BatchController = BatchController;
@@ -41,7 +41,7 @@ __decorate([
     (0, common_1.Get)('/getBatchById'),
     __param(0, (0, common_1.Param)('id')),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number]),
+    __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", void 0)
 ], BatchController.prototype, "findOne", null);
 __decorate([
@@ -49,7 +49,7 @@ __decorate([
     __param(0, (0, common_1.Param)('id')),
     __param(1, (0, common_1.Body)()),
     __metadata("design:type", Function),
-    __metadata("design:paramtypes", [Number, update_batch_dto_1.UpdateBatchDto]),
+    __metadata("design:paramtypes", [String, update_batch_dto_1.UpdateBatchDto]),
     __metadata("design:returntype", void 0)
 ], BatchController.prototype, "update", null);
 exports.BatchController = BatchController = __decorate([

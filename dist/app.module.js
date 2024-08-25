@@ -12,28 +12,27 @@ const app_controller_1 = require("./app.controller");
 const app_service_1 = require("./app.service");
 const customer_module_1 = require("./customer/customer.module");
 const user_module_1 = require("./user/user.module");
-const typeorm_1 = require("@nestjs/typeorm");
 const batch_module_1 = require("./batch/batch.module");
 const transaction_module_1 = require("./transaction/transaction.module");
 const fnb_module_1 = require("./fnb/fnb.module");
 const bank_module_1 = require("./bank/bank.module");
+const bank_service_1 = require("./bank/bank.service");
+const fnb_service_1 = require("./fnb/fnb.service");
+const user_service_1 = require("./user/user.service");
+const transaction_service_1 = require("./transaction/transaction.service");
+const batch_service_1 = require("./batch/batch.service");
+const batch_controller_1 = require("./batch/batch.controller");
+const fnb_controller_1 = require("./fnb/fnb.controller");
+const transaction_controller_1 = require("./transaction/transaction.controller");
+const user_controller_1 = require("./user/user.controller");
+const firestore_util_1 = require("./utils/firestore_util");
+const fnb_api_1 = require("./utils/fnb_api");
 let AppModule = class AppModule {
 };
 exports.AppModule = AppModule;
 exports.AppModule = AppModule = __decorate([
     (0, common_1.Module)({
         imports: [
-            typeorm_1.TypeOrmModule.forRoot({
-                type: 'postgres',
-                host: process.env.PGHOST,
-                port: 5432,
-                username: process.env.PGUSER,
-                password: process.env.PGPASSWORD,
-                database: process.env.PGDATABASE,
-                autoLoadEntities: true,
-                synchronize: true,
-                ssl: true,
-            }),
             customer_module_1.CustomerModule,
             user_module_1.UserModule,
             batch_module_1.BatchModule,
@@ -41,8 +40,8 @@ exports.AppModule = AppModule = __decorate([
             fnb_module_1.FnbModule,
             bank_module_1.BankModule,
         ],
-        controllers: [app_controller_1.AppController],
-        providers: [app_service_1.AppService],
+        controllers: [app_controller_1.AppController, batch_controller_1.BatchController, fnb_controller_1.FnbController, transaction_controller_1.TransactionController, user_controller_1.UserController],
+        providers: [app_service_1.AppService, bank_service_1.BankService, fnb_service_1.FnbService, user_service_1.UserService, transaction_service_1.TransactionService, batch_service_1.BatchService, firestore_util_1.FirestoreService, fnb_api_1.FNBApi],
     })
 ], AppModule);
 //# sourceMappingURL=app.module.js.map

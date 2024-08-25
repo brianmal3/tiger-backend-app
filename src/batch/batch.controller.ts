@@ -13,13 +13,13 @@ export class BatchController {
   }
 
   @Get('/getBatchById')
-  findOne(@Param('id') id: number) {
-    return this.batchService.findOne(+id);
+  findOne(@Param('id') id: string) {
+    return this.batchService.findOne(id);
   }
 
   @Post('/updateBatch')
-  update(@Param('id') id: number, @Body() updateBatchDto: UpdateBatchDto) {
-    return this.batchService.update(+id, updateBatchDto);
+  update(@Param('id') id: string, @Body() updateBatchDto: UpdateBatchDto) {
+    return this.batchService.update(id, updateBatchDto);
   }
 
 }

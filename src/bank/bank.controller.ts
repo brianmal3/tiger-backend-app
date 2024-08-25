@@ -1,39 +1,36 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Param } from '@nestjs/common';
 import { BankService } from './bank.service';
 import { CreateBankDto } from './dto/create-bank.dto';
-import { UpdateBankDto } from './dto/update-bank.dto';
 import { Bank } from './entities/bank.entity';
+import { CustomResponse } from 'src/utils/custom_response';
 
 @Controller("bank")
 export class BankController {
   constructor(private readonly bankService: BankService) {}
 
   @Post("addBank")
-  create(@Body() createBankDto: CreateBankDto): Promise<Bank> {
-    return this.bankService.createBank(createBankDto);
+  async create(@Body() createBankDto: CreateBankDto): Promise<CustomResponse> {
+    return await this.bankService.createBank(createBankDto);
   }
 
+
   @Get("getBanks")
-  findAll(): Promise<Bank[]> {
-    return this.bankService.findAll();
+  async findAll(): Promise<CustomResponse> {
+    return await this.bankService.findAll();
+  }
+  
+  @Get("doAllBanks")
+  async doAllBanks(): Promise<CustomResponse> {
+    return await this.bankService.doAllBanks();
   }
 
   @Get("getBank")
-  findOne(@Param("id") id: string): Promise<Bank> {
-    return this.bankService.findOne(+id);
+  async findOne(@Param("id") id: string): Promise<Bank> {
+    return await this.bankService.findOne(id);
   }
   @Get("getBankByName")
   async findByName(@Param("name") name: string): Promise<Bank> {
-    return this.bankService.findByName(name);
+    return await this.bankService.findByName(name);
   }
 
-  @Patch("updateBank")
-  update(@Param("id") id: string, @Body() updateBankDto: UpdateBankDto) {
-    return this.bankService.update(+id, updateBankDto);
-  }
-
-  @Delete("deleteBank")
-  remove(@Param("id") id: string) {
-    return this.bankService.remove(+id);
-  }
 }

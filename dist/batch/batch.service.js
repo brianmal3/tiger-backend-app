@@ -14,28 +14,28 @@ var __param = (this && this.__param) || function (paramIndex, decorator) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.BatchService = void 0;
 const common_1 = require("@nestjs/common");
-const typeorm_1 = require("typeorm");
+const firestore_util_1 = require("../utils/firestore_util");
 let BatchService = class BatchService {
-    constructor(batchRepository) {
-        this.batchRepository = batchRepository;
+    constructor(fire) {
+        this.fire = fire;
     }
-    findAll() {
-        return this.batchRepository.find();
+    async findAll() {
+        return this.fire.readAllData('Batches');
     }
-    findOne(id) {
-        return this.batchRepository.findOne({ where: { id: id } });
+    async findOne(id) {
+        return this.fire.readDataByField('Batches', 'id', id);
     }
-    update(id, updateBatchDto) {
-        return this.batchRepository.update(id, updateBatchDto);
+    async create(batch) {
+        return this.fire.writeData('Batches', batch.batch_id, batch);
     }
-    remove(id) {
-        return this.batchRepository.delete(id);
+    async update(id, updateBatchDto) {
+        return this.fire.writeData('Batches', id, updateBatchDto);
     }
 };
 exports.BatchService = BatchService;
 exports.BatchService = BatchService = __decorate([
     (0, common_1.Injectable)(),
     __param(0, (0, common_1.Inject)()),
-    __metadata("design:paramtypes", [typeorm_1.Repository])
+    __metadata("design:paramtypes", [firestore_util_1.FirestoreService])
 ], BatchService);
 //# sourceMappingURL=batch.service.js.map

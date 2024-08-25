@@ -1,13 +1,11 @@
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
-import { Repository } from 'typeorm';
-import { User } from './entities/user.entity';
+import { FirestoreService } from 'src/utils/firestore_util';
 export declare class UserService {
-    private userRepository;
-    constructor(userRepository: Repository<User>);
-    create(createUserDto: CreateUserDto): Promise<CreateUserDto & User>;
-    findAll(): Promise<User[]>;
-    findOne(id: number): Promise<User>;
-    update(id: number, updateUserDto: UpdateUserDto): Promise<import("typeorm").UpdateResult>;
-    remove(id: number): Promise<import("typeorm").DeleteResult>;
+    private fire;
+    constructor(fire: FirestoreService);
+    create(createUserDto: CreateUserDto): Promise<string | false>;
+    findAll(): Promise<any[]>;
+    findOne(id: string): Promise<any[]>;
+    update(id: string, updateUserDto: UpdateUserDto): Promise<string | false>;
 }

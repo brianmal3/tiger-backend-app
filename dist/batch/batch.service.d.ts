@@ -1,11 +1,11 @@
 import { UpdateBatchDto } from './dto/update-batch.dto';
 import { Batch } from './entities/batch.entity';
-import { Repository } from 'typeorm';
+import { FirestoreService } from 'src/utils/firestore_util';
 export declare class BatchService {
-    private batchRepository;
-    constructor(batchRepository: Repository<Batch>);
-    findAll(): Promise<Batch[]>;
-    findOne(id: number): Promise<Batch>;
-    update(id: number, updateBatchDto: UpdateBatchDto): Promise<import("typeorm").UpdateResult>;
-    remove(id: number): Promise<import("typeorm").DeleteResult>;
+    private fire;
+    constructor(fire: FirestoreService);
+    findAll(): Promise<any[]>;
+    findOne(id: string): Promise<any[]>;
+    create(batch: Batch): Promise<string | false>;
+    update(id: string, updateBatchDto: UpdateBatchDto): Promise<string | false>;
 }

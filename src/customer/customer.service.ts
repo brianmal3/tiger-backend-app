@@ -3,30 +3,28 @@ import { CreateCustomerDto } from './dto/create-customer.dto';
 import { UpdateCustomerDto } from './dto/update-customer.dto';
 import { Customer } from './entities/customer.entity';
 import { Repository } from 'typeorm';
+import { FirestoreService } from 'src/utils/firestore_util';
 
 @Injectable()
 export class CustomerService {
   constructor(
-    @Inject()
-    private customerRepository: Repository<Customer>,
+    private fire: FirestoreService,
   ) {}
   create(createCustomerDto: CreateCustomerDto) {
-    return this.customerRepository.save(createCustomerDto);
+    const id = `${new Date().getTime()}`
+    return this.fire.writeData("customers", id, createCustomerDto);
   }
 
   findAll() {
-    return this.customerRepository.find();
+    return this.fire.readAllData("customers");
   }
 
-  findOne(id: number) {
-    return this.customerRepository.findOne({where: {id: id}});
+  findOne(id: string) {
+    return this.fire.readDataByField("customers", "id", id);
   }
 
-  update(id: number, updateCustomerDto: UpdateCustomerDto) {
-    return this.customerRepository.update(id, updateCustomerDto);
+  update(id: string, updateCustomerDto: UpdateCustomerDto) {
+    return this.fire.writeData("customers", id, updateCustomerDto);
   }
 
-  remove(id: number) {
-    return this.customerRepository.delete(id);
-  }
 }

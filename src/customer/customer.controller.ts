@@ -18,17 +18,13 @@ export class CustomerController {
   }
 
   @Get('/getCustomer')
-  findOne(@Param('id') id: number) {
-    return this.customerService.findOne(+id);
+  findOne(@Param('id') id: string) {
+    return this.customerService.findOne(id);
   }
 
   @Patch('/updateCustomer')
-  update(@Param('id') id: number, @Body() updateCustomerDto: UpdateCustomerDto) {
-    return this.customerService.update(+id, updateCustomerDto);
+  update(@Param('id') id: string, @Body() updateCustomerDto: UpdateCustomerDto) {
+    return this.customerService.update(id, updateCustomerDto);
   }
 
-  @Delete('deleteCustomer')
-  remove(@Param('id') id: number) {
-    return this.customerService.remove(+id);
-  }
 }

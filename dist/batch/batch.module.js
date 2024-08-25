@@ -10,14 +10,14 @@ exports.BatchModule = void 0;
 const common_1 = require("@nestjs/common");
 const batch_service_1 = require("./batch.service");
 const batch_controller_1 = require("./batch.controller");
-const typeorm_1 = require("typeorm");
+const firestore_util_1 = require("../utils/firestore_util");
 let BatchModule = class BatchModule {
 };
 exports.BatchModule = BatchModule;
 exports.BatchModule = BatchModule = __decorate([
     (0, common_1.Module)({
         controllers: [batch_controller_1.BatchController],
-        providers: [batch_service_1.BatchService, (typeorm_1.Repository)],
+        providers: [batch_service_1.BatchService, firestore_util_1.FirestoreService],
     })
 ], BatchModule);
 //# sourceMappingURL=batch.module.js.map

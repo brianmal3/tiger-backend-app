@@ -10,16 +10,14 @@ exports.UserModule = void 0;
 const common_1 = require("@nestjs/common");
 const user_service_1 = require("./user.service");
 const user_controller_1 = require("./user.controller");
-const database_module_1 = require("../database/database.module");
-const typeorm_1 = require("typeorm");
+const firestore_util_1 = require("../utils/firestore_util");
 let UserModule = class UserModule {
 };
 exports.UserModule = UserModule;
 exports.UserModule = UserModule = __decorate([
     (0, common_1.Module)({
-        imports: [database_module_1.DatabaseModule],
         controllers: [user_controller_1.UserController],
-        providers: [user_service_1.UserService, (typeorm_1.Repository)],
+        providers: [user_service_1.UserService, firestore_util_1.FirestoreService],
     })
 ], UserModule);
 //# sourceMappingURL=user.module.js.map

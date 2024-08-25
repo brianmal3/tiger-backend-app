@@ -16,28 +16,24 @@ exports.BankController = void 0;
 const common_1 = require("@nestjs/common");
 const bank_service_1 = require("./bank.service");
 const create_bank_dto_1 = require("./dto/create-bank.dto");
-const update_bank_dto_1 = require("./dto/update-bank.dto");
 let BankController = class BankController {
     constructor(bankService) {
         this.bankService = bankService;
     }
-    create(createBankDto) {
-        return this.bankService.createBank(createBankDto);
+    async create(createBankDto) {
+        return await this.bankService.createBank(createBankDto);
     }
-    findAll() {
-        return this.bankService.findAll();
+    async findAll() {
+        return await this.bankService.findAll();
     }
-    findOne(id) {
-        return this.bankService.findOne(+id);
+    async doAllBanks() {
+        return await this.bankService.doAllBanks();
+    }
+    async findOne(id) {
+        return await this.bankService.findOne(id);
     }
     async findByName(name) {
-        return this.bankService.findByName(name);
-    }
-    update(id, updateBankDto) {
-        return this.bankService.update(+id, updateBankDto);
-    }
-    remove(id) {
-        return this.bankService.remove(+id);
+        return await this.bankService.findByName(name);
     }
 };
 exports.BankController = BankController;
@@ -55,6 +51,12 @@ __decorate([
     __metadata("design:returntype", Promise)
 ], BankController.prototype, "findAll", null);
 __decorate([
+    (0, common_1.Get)("doAllBanks"),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", []),
+    __metadata("design:returntype", Promise)
+], BankController.prototype, "doAllBanks", null);
+__decorate([
     (0, common_1.Get)("getBank"),
     __param(0, (0, common_1.Param)("id")),
     __metadata("design:type", Function),
@@ -68,21 +70,6 @@ __decorate([
     __metadata("design:paramtypes", [String]),
     __metadata("design:returntype", Promise)
 ], BankController.prototype, "findByName", null);
-__decorate([
-    (0, common_1.Patch)("updateBank"),
-    __param(0, (0, common_1.Param)("id")),
-    __param(1, (0, common_1.Body)()),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String, update_bank_dto_1.UpdateBankDto]),
-    __metadata("design:returntype", void 0)
-], BankController.prototype, "update", null);
-__decorate([
-    (0, common_1.Delete)("deleteBank"),
-    __param(0, (0, common_1.Param)("id")),
-    __metadata("design:type", Function),
-    __metadata("design:paramtypes", [String]),
-    __metadata("design:returntype", void 0)
-], BankController.prototype, "remove", null);
 exports.BankController = BankController = __decorate([
     (0, common_1.Controller)("bank"),
     __metadata("design:paramtypes", [bank_service_1.BankService])

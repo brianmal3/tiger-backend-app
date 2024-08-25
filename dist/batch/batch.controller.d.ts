@@ -3,7 +3,7 @@ import { UpdateBatchDto } from './dto/update-batch.dto';
 export declare class BatchController {
     private readonly batchService;
     constructor(batchService: BatchService);
-    findAll(): Promise<import("./entities/batch.entity").Batch[]>;
-    findOne(id: number): Promise<import("./entities/batch.entity").Batch>;
-    update(id: number, updateBatchDto: UpdateBatchDto): Promise<import("typeorm").UpdateResult>;
+    findAll(): Promise<any[]>;
+    findOne(id: string): Promise<any[]>;
+    update(id: string, updateBatchDto: UpdateBatchDto): Promise<string | false>;
 }

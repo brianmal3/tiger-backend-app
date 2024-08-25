@@ -7,8 +7,8 @@ export class TransactionController {
 
  
   @Get('/getBatchTransactions')
-  findBatchTransactions(@Param('batchId') batchId: number) {
-    return this.transactionService.findBatchTransactions(+batchId);
+  async findBatchTransactions(@Param('batchId') batchId: string) {
+    return await this.transactionService.findBatchTransactions(batchId);
   }
 
 }

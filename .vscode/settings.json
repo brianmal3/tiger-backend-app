@@ -1,8 +1,17 @@
 {
     "cSpell.words": [
+        "Absa",
         "buildx",
+        "Capitec",
+        "Firestore",
         "gcloud",
+        "Investec",
+        "Nedbank",
         "PGDATABASE",
+        "PGHOST",
+        "PGPASSWORD",
+        "PGUSER",
+        "Tyme",
         "typeorm"
     ]
 }

@@ -1,19 +1,19 @@
 import { Inject, Injectable } from '@nestjs/common';
 import { Batch, Repository } from "typeorm";
 import { Transaction } from './entities/transaction.entity';
+import { FirestoreService } from 'src/utils/firestore_util';
 
 @Injectable()
 export class TransactionService {
   constructor(
-    @Inject()
-    private transactionRepository: Repository<Transaction>
+    private fire: FirestoreService
   ) {}
   findAll() {
-    return this.transactionRepository.find();
+    return this.fire.readAllData('Transactions');
   }
 
-  findBatchTransactions(batchId: number) {
-    return this.transactionRepository.find({ where: { batch_id: batchId } });
+  findBatchTransactions(batchId: string) {
+    return this.fire.readDataByField('Transactions', 'batchId', batchId);
   }
 
 }
