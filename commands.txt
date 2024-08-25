@@ -20,5 +20,16 @@ eval "$(ssh-agent -s)"
 ssh-add ~/.ssh/i_account2 && ssh -T git@github.com
 
 🍎🍎🍎🍎 COMMAND TO PUSH CODE
-./push.sh ~/.ssh/i_account1 git@github.com:malengatiger/bidvest-nestjs.git "🔵 🔵 🔵 CHECKPOINT CHARLIE 1"
+./push.sh ~/.ssh/i_greene git@github.com:brianmal3/tiger-backend-app.git "🔵 🔵 🔵 CHECKPOINT CHARLIE 1"
 
+GENERATE SSH KEY
+ssh-keygen -t ed25519 -C "brian.malgreen33@gmail.com"
+
+code  ~/.ssh/config
+ssh-add ~/.ssh/i_greene
+Identity added: /Users/aubreymalabie/.ssh/i_greene (brian.malgreen33@gmail.com)
+
+pbcopy < ~/.ssh/i_greene.pub
+
+
+https://docs.github.com/en/authentication/connecting-to-github-with-ssh/generating-a-new-ssh-key-and-adding-it-to-the-ssh-agent
