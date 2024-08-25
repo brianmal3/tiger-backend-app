@@ -30,7 +30,7 @@ let FnbService = class FnbService {
             else {
                 return {
                     statusCode: 500,
-                    message: 'getFakeTransactions - Internal Server Error',
+                    message: 'getFakeTransactions - Fucking Server Error',
                 };
             }
         }

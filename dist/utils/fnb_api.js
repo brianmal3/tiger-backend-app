@@ -103,9 +103,10 @@ let FNBApi = class FNBApi {
                 customResponse.list.forEach((tx) => {
                     console.log(`${tag} Transaction, id: ${tx.id} 🍎 amount: ${tx.amount}`);
                 });
+                console.log(`\n${tag} fake transactions: 🍎 ${customResponse.list.length} 🍎`);
             }
             else {
-                console.log(`${tag} Ran into Error: ${JSON.stringify(customResponse)}`);
+                console.log(`\n${tag} ... ran into bleeping error: ${JSON.stringify(customResponse)}\n`);
             }
             return customResponse;
         }
