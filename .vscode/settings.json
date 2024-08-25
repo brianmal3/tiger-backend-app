@@ -1,5 +1,8 @@
 {
     "cSpell.words": [
+        "buildx",
+        "gcloud",
+        "PGDATABASE",
         "typeorm"
     ]
 }

@@ -10,11 +10,11 @@ import {
 import { Logger } from '@nestjs/common';
 import { config } from 'dotenv';
 
-const tag = '🍐🍐🍐🍐 ReconBack 🍐🍐';
+const tag = '🍐🍐🍐🍐 Tiger ReconBackend 🍐🍐';
 async function bootstrap() {
   config();
-  console.log(`${tag} ReconBack is starting!`);
-  console.log(`${tag} ReconBack db: 🍎 ${process.env.PGDATABASE} 🍎`);
+  console.log(`${tag} Tiger Recon Backend is starting!`);
+  console.log(`${tag} Tiger Recon Backend Postgres database on Neon: 🍎 ${process.env.PGDATABASE} 🍎`);
 
   const app = await NestFactory.create(AppModule);
   await app.listen(8080);
@@ -22,9 +22,11 @@ async function bootstrap() {
   initializeApp({
     credential: applicationDefault(),
   });
-  console.log(`${tag} Firebase has been initialized!`);
+
+  console.log(`${tag} Firebase has been initialized! - utilized for user auth`);
 
   const db = getFirestore();
   Logger.log(`${tag} Firestore has been setup: 🍎 ${db.databaseId} 🍎`);
+  Logger.log(`${tag} 🥬 🥬 Tiger Recon Backend is up and waiting for requests!! 🍎 🍎`);
 }
 bootstrap();

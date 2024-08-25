@@ -7,7 +7,7 @@ echo
 echo
 echo 🔴 🔴 🔴 🔴 🔴 Tiger Backend GitHub Push starting ...
 echo 🔴 🔴 🔴 🔴 🔴 
-
+echo
 # Ensure the script is called with three arguments
 if [ "$#" -ne 1 ]; then
   echo "👿 Please enter commit message. 👿"
@@ -36,22 +36,22 @@ if ! echo "$repository_ssh_url" | grep -q "^git@github.com:.*\.git$"; then
   echo "👿 Repository SSH URL does not seem valid: $repository_ssh_url 👿"
   exit 1
 fi
-
+echo
 # Add and commit the code
 echo "🎽🎽 - Adding and committing the code..."
 git add .
 git commit -m "$commit_message"
-
+echo
 # Set up SSH and check connection
 echo "🎽🎽🎽🎽 Pushing the code ... using SSH Key ..."
 eval "$(ssh-agent -s)"
 ssh-add "$ssh_key_path" || { echo "👿 Failed to add SSH key. 👿"; exit 1; }
 ssh -T git@github.com 
-
+echo
 # Set the remote URL
 echo "🍎 🍎 🍎 Setting remote SSH URL ... $2"
 git remote set-url origin "$repository_ssh_url"
-
+echo
 # Push the code
 echo "🍎 🍎 🍎 ... Pushing the code ..."
 git push || { echo "👿👿👿👿 Failed to push code. 👿"; exit 1; }
